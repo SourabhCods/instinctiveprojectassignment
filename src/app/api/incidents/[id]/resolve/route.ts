@@ -2,11 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../../../../../lib/prisma';
 
 export async function PATCH(
-  _request: NextRequest, // The request object is not used in this specific handler, hence the underscore
-  context: { params: { id: string } } // Correct type definition for the second argument
+  request: NextRequest, // The request object now carries the params
 ) {
-  // Destructure the 'id' from context.params
-  const { id } = context.params;
+  // Access the 'id' directly from request.params
+  // In Next.js 15 canary, dynamic route parameters might be available directly on the NextRequest object.
+  // We cast to `any` for flexibility in canary versions, but ideally, NextRequest would be typed with `params`.
+  const id = (request as any).params.id; 
+
+  if (!id) {
+    return NextResponse.json(
+      { message: "Incident ID is missing" },
+      { status: 400 }
+    );
+  }
 
   try {
     const updated = await prisma.incident.update({
@@ -19,7 +27,16 @@ export async function PATCH(
   } catch (error) {
     // Log the error for debugging purposes
     console.error("Failed to update incident:", error);
-    // Return an error response if the update fails
+
+    // Check if the error is due to the incident not being found
+    if (error instanceof Error && error.message.includes("RecordNotFound")) {
+      return NextResponse.json(
+        { message: `Incident with ID ${id} not found.` },
+        { status: 404 }
+      );
+    }
+
+    // Return a generic error response if the update fails
     return NextResponse.json(
       { message: "Failed to resolve incident", error: error instanceof Error ? error.message : String(error) },
       { status: 500 }
