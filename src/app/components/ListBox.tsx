@@ -1,5 +1,5 @@
 'use client';
-import { Incident , Prisma } from '@prisma/client';
+import {  Prisma } from '@prisma/client';
 import { useEffect, useState } from 'react';
 
 type IncidentWithCamera = Prisma.IncidentGetPayload<{ include: { camera: true } }>;
