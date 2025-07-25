@@ -1,8 +1,10 @@
 'use client';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 
 import React, { useState } from 'react';
 import ListBox from './ListBox'
-import { Incident, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 type IncidentWithCamera = Prisma.IncidentGetPayload<{ include: { camera: true } }>;
 

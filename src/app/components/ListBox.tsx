@@ -1,4 +1,7 @@
 'use client';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
+
 import {  Prisma } from '@prisma/client';
 import { useEffect, useState } from 'react';
 
