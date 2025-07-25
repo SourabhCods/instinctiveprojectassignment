@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Instinctive Project Assignment
 
-## Getting Started
 
-First, run the development server:
+
+## Steps For Deployment
+
+Clone the Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/your-repo.git
+
+```
+Install Dependencies
+
+```bash
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create a .env file in the root directory and add:
+```
+DATABASE_URL="postgresql://postgres.idqilraruetpocwezuuw:vjfzB64Ez2XdbWuc@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?pgbouncer=true"
+```
+Set Up Prisma
+```
+npx prisma generate
+npx prisma db push
+```
+Start Development Server
+```
+npm run dev
+```
+The app will run on : http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Deployment on Vercel
+```
+Go to Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Import your GitHub repository
 
-## Learn More
+Add the same .env variables in environment variables field.
 
-To learn more about Next.js, take a look at the following resources:
+Click Deploy
+```
+## Tech Decisions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* **Supabase**: Chosen as a free cloud database to avoid the hassle of managing database hosting.
+* **Prisma**: Used as the ORM because it provides powerful, built-in functions for performing database operations efficiently.
+* **Vercel**: Selected for deployment since it is the most optimized platform for Next.js applications.
+## If I had more time
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**1.** &nbsp; Make the app fully responsive for different screen sizes.
 
-## Deploy on Vercel
+**2.** &nbsp; Enable the Incidents navigation item in the navbar to allow sorting incidents by their start time dynamically (currently, incidents are displayed in ascending order because the seeded data was inserted in increasing start time sequence like 14:00, 15:45, and so on).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**3.** &nbsp; Implement logic to display a mini strip with two additional camera thumbnails dynamically. For example, if someone is viewing Camera 2 recordings, the strip should show thumbnails from Camera 1 and Camera 3. Currently, the app displays two random incidents that do not change when switching the main view (currently a static image instead of an MP4 video).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**4.** &nbsp; Couldn’t find a free MP4 video, so I used static images related to the problem statement instead.
+
+**5.** &nbsp; As of now, I’ve built a timeline UI, but it’s non-functional. The yellow circle can be dragged along the scale, but if I had an actual video, I would have fully implemented the functionality.
