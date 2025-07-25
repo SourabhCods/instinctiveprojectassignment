@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import  { prisma }  from '../../../../../../lib/prisma'
+import { prisma } from '../../../../../../lib/prisma';
 
+export async function PATCH(req: NextRequest, context: { params: { id: string } }) {
+  const { id } = context.params;
 
-export async function PATCH(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
   const updated = await prisma.incident.update({
-    where: { id: Number(params.id) },
+    where: { id: Number(id) },
     data: { resolved: true },
   });
 
