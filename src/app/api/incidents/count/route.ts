@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { NextResponse } from 'next/server';
 import  { prisma }  from '../../../../../lib/prisma' // assuming you have prisma client setup in lib/prisma.ts
 

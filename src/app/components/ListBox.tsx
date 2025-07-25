@@ -1,6 +1,4 @@
 'use client';
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @next/next/no-img-element */
 
 import {  Prisma } from '@prisma/client';
 import { useEffect, useState } from 'react';
@@ -81,6 +79,7 @@ export default function ListBox({ onThumbnailClick }: Props) {
               <img
                 src="./warn.png"
                 className="w-[2rem] h-[2rem] ml-4.5 hover:rotate-y-360 duration-1000 ease-in"
+                alt='no image'
               />
               {incidents.length}&nbsp;Unresolved Incidents
             </div>
@@ -90,6 +89,7 @@ export default function ListBox({ onThumbnailClick }: Props) {
               <img
                 src="./success.png"
                 className="w-[2rem] h-[2rem] hover:rotate-y-360 duration-1000 ease-in"
+                alt='no image'
               />
               <span className='text-xl font-mono'>{resolvedIncidents}  Resolved Incidents</span>
             </div>
@@ -105,9 +105,10 @@ export default function ListBox({ onThumbnailClick }: Props) {
                         src={incd.thumbnailUrl}
                         onClick={() => onThumbnailClick(incd)}
                         className="h-28 w-44 object-cover mr-5 rounded-lg cursor-pointer mt-3"
+                        alt='no image'
                       />
                       <div >
-                        <img src={changeIcon(incd.type)} alt="icon" className="inline mr-3.5" />
+                        <img src={changeIcon(incd.type)} alt="icon" className="inline mr-3.5"/>
                         <p className="leading-[2.5] inline text-stone-50 font-mono">
                           <b>{incd.type}</b>
                         </p>
