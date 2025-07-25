@@ -3,10 +3,10 @@ import { prisma } from '../../../../../../lib/prisma';
 
 export async function PATCH(
   _request: NextRequest,
-  context: { params: { id: string } }
+  id: string
 ) {
   try {
-    const { id } = context.params;
+    // const { id } = context.params;
 
     if (!id || isNaN(Number(id))) {
       return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
