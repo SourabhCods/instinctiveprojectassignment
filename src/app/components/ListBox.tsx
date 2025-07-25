@@ -2,12 +2,13 @@
 import { Incident , Prisma } from '@prisma/client';
 import { useEffect, useState } from 'react';
 
+type IncidentWithCamera = Prisma.IncidentGetPayload<{ include: { camera: true } }>;
+
 type Props = {
   onThumbnailClick: (incd: IncidentWithCamera) => void;
 };
 
 
-type IncidentWithCamera = Prisma.IncidentGetPayload<{ include: { camera: true } }>;
 
 
 export default function ListBox({ onThumbnailClick }: Props) {
@@ -36,6 +37,7 @@ export default function ListBox({ onThumbnailClick }: Props) {
 
     setTimeout(() => {
       setIncidents(prev => prev.filter((i) => i.id !== id));
+      setResolvedIncidents((prev : any) => prev + 1);
     }, 500);
 
     await fetch(`/api/incidents/${id}/resolve`, { method: 'PATCH' });
@@ -94,7 +96,7 @@ export default function ListBox({ onThumbnailClick }: Props) {
             incidents.map((incd) => {
               return (
                 <>
-                  <div className="p-3.5 h-[170px] w-full flex justify-between items-center gap-25" id={`incident-${incd.id}`}>
+                  <div key={incd.id} className="p-3.5 h-[170px] w-full flex justify-between items-center gap-25" id={`incident-${incd.id}`}>
                     <div className="flex">
                       <img
                         src={incd.thumbnailUrl}
