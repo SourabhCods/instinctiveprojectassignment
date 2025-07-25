@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <div className='w-[100%] h-[80px] border fixed flex justify-between items-center bg-zinc-900 rounded-br-2xl rounded-bl-xl shadow-lg shadow-yellow-700'>
 
-      {/* company logo & name */}
+      {/* comp logo & name */}
       <div className='p-4 cursor-pointer'>
         <img src={'./logo.png'} className='h-8' alt='no image'/>
       </div>
@@ -47,7 +47,7 @@ const NavBar = () => {
           <p className='text-white font-mono'>devsonu478@gmail.com</p>
         </div>
       </div>
-    </div>
+    </div> 
   )
 }
 

@@ -13,7 +13,7 @@ const DashBoard = () => {
     console.log(incd)
     setSelectedIncident(incd);
   };
-
+  
   return (
     <div className='flex justify-around items-center h-screen p-[1rem]'>
       {/* mp4 video play/static image */}

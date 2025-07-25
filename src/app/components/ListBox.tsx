@@ -38,7 +38,7 @@ export default function ListBox({ onThumbnailClick }: Props) {
 
     setTimeout(() => {
       setIncidents(prev => prev.filter((i) => i.id !== id));
-      setResolvedIncidents((prev : any) => prev + 1);
+      setResolvedIncidents((prev) => (prev ?? 0) + 1);
     }, 500);
 
     await fetch(`/api/incidents/${id}/resolve`, { method: 'PATCH' });
