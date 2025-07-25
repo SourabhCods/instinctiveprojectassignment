@@ -12,7 +12,7 @@ type IncidentWithCamera = Prisma.IncidentGetPayload<{ include: { camera: true } 
 
 export default function ListBox({ onThumbnailClick }: Props) {
   const [incidents, setIncidents] = useState<IncidentWithCamera[]>([]);
-  const [totalIncidents , setTotalIncidents] = useState<Number>()
+  const [resolvedIncidents , setResolvedIncidents] = useState<number>()
 
   // to mount component with incident array data initially
 
@@ -20,6 +20,12 @@ export default function ListBox({ onThumbnailClick }: Props) {
     fetch('/api/incidents?resolved=false')
       .then((res) => res.json())
       .then(data => setIncidents(data));
+  } , [])
+
+  useEffect(() => {
+    fetch('/api/incidents/count')
+      .then((res) => res.json())
+      .then(data => setResolvedIncidents(data));
   } , [])
 
   const resolveIncident = async (id: number) => {
@@ -66,7 +72,7 @@ export default function ListBox({ onThumbnailClick }: Props) {
 
           <div className="h-auto w-full max-w-[40rem] flex justify-between items-center mb-5">
             {/* Left (Unresolved) */}
-            <div className="flex items-center gap-2 text-white text-2xl">
+            <div className="flex items-center gap-2 text-white text-xl font-mono">
               <img
                 src="./warn.png"
                 className="w-[2rem] h-[2rem] ml-4.5 hover:rotate-y-360 duration-1000 ease-in"
@@ -78,9 +84,9 @@ export default function ListBox({ onThumbnailClick }: Props) {
             <div className="flex items-center gap-2 text-white text-md">
               <img
                 src="./success.png"
-                className="w-[2rem] h-[2rem] ml-4.5 hover:rotate-y-360 duration-1000 ease-in"
+                className="w-[2rem] h-[2rem] hover:rotate-y-360 duration-1000 ease-in"
               />
-              1&nbsp;Resolved Incidents
+              <span className='text-xl font-mono'>{resolvedIncidents}  Resolved Incidents</span>
             </div>
           </div>
 

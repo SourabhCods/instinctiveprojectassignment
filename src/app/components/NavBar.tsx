@@ -7,7 +7,7 @@ const NavBar = () => {
 
       {/* company logo & name */}
       <div className='p-4 cursor-pointer'>
-        <img src={'./logo.png'} className='h-10'/>
+        <img src={'./logo.png'} className='h-8'/>
       </div>
 
       {/* nav items */}
@@ -38,9 +38,13 @@ const NavBar = () => {
         </p>
       </div>
 
-      {/* owner details */}
-      <div className='cursor-pointer'>
-        <img src={'./profile.png'} className='h-15 p-1'/>
+      {/* account details */}
+      <div className='cursor-pointer flex justify-around items-center gap-4 h-auto w-auto'>
+        <img src={'./profilelogo.png'} className='h-15 p-2'/>
+        <div className='flex flex-col p-2'>
+          <p className='text-white font-mono'>Sourabh Goyal</p>
+          <p className='text-white font-mono'>devsonu478@gmail.com</p>
+        </div>
       </div>
     </div>
   )
