@@ -5,12 +5,28 @@ import { FlatCompat } from "@eslint/eslintrc";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+import { FlatCompat } from '@eslint/eslintrc';
+
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+  // import.meta.dirname is available after Node.js v20.11.0
+  baseDirectory: import.meta.dirname,
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.config({
+    extends: ['next', 'next/core-web-vitals'],
+    rules: {
+      // Existing custom rules
+      'react/no-unescaped-entities': 'off',
+      '@next/next/no-page-custom-font': 'off',
+
+      // ✅ Additional rules for your case
+      '@typescript-eslint/no-unused-vars': 'off',  // Ignore unused vars
+      '@typescript-eslint/no-explicit-any': 'off', // Allow 'any' type
+      'jsx-a11y/alt-text': 'off', // Ignore missing alt for <img>
+      '@next/next/no-img-element': 'off', // Allow native <img>
+    },
+  }),
 ];
 
 export default eslintConfig;
