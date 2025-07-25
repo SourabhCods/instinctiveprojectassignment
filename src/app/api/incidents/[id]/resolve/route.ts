@@ -3,10 +3,10 @@ import { prisma } from '../../../../../../lib/prisma';
 
 export async function PATCH(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  context : { params: { id: string } }
 ) {
   const updated = await prisma.incident.update({
-    where: { id: Number(params.id) },
+    where: { id: Number(context.params.id) },
     data: { resolved: true },
   });
 

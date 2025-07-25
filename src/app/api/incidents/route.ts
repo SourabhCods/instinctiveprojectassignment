@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '../../../../lib/prisma';
+import  { prisma }  from '../../../../lib/prisma'
 
-export async function PATCH(
-  _req: NextRequest,
-  context: { params: { id: string } }
-) {
-  const { id } = context.params;
-  const updated = await prisma.incident.update({
-    where: { id: Number(id) },
-    data: { resolved: true },
-  });
+export async function GET(_req: NextRequest) {
 
-  return NextResponse.json(updated);
+  const incidents = await prisma.incident.findMany({
+  where: { resolved: false },
+  orderBy: { tsEnd: 'asc' },
+  include: {
+    camera: true,
+  },
+});
+
+
+  return NextResponse.json(incidents);
 }
