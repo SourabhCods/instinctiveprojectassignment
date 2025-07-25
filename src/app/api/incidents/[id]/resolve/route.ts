@@ -1,13 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../../../../../lib/prisma';
 
-interface Context {
-  params: { id: string };
-}
+type RouteContext = {
+  params: {
+    id: string;
+  };
+};
 
-export async function PATCH(req: NextRequest, { params }: Context) {
+export async function PATCH(req: NextRequest, context: RouteContext) {
+  const { id } = context.params;
+
   const updated = await prisma.incident.update({
-    where: { id: Number(params.id) },
+    where: { id: Number(id) },
     data: { resolved: true },
   });
 
