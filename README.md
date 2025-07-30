@@ -41,6 +41,9 @@ Add the same .env variables in environment variables field.
 
 Click Deploy
 ```
+### Live Project Link 👇
+https://spyfash.onrender.com/
+
 ## Tech Decisions
 
 * **Supabase**: Chosen as a free cloud database to avoid the hassle of managing database hosting.
